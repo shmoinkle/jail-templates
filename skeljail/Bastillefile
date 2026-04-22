@@ -1,0 +1,25 @@
+# ==============================================================================
+# BASTILLEFILE: skeljail
+# PURPOSE: a skeleton jail template, meant to be used with an init-base jail
+# ==============================================================================
+
+ARG TEMPLATE_AUTHOR="shmoinkle"
+
+SYSRC update_motd="NO"
+SYSRC sendmail_enable="NONE"
+SYSRC clear_tmp_enable="YES"
+SYSRC background_fsck="NO"
+
+# these are off by default but i like to leave em here
+#SYSRC nfs_client_enable="NO"
+#SYSRC nfs_server_enable="NO"
+#SYSRC sshd_enable="NO"
+#SYSRC auditd_enable="NO"
+#SYSRC dumpdev="NO"
+#SYSRC syslogd_flags="-ss"
+
+CMD pw usermod root -s /usr/local/bin/bash
+
+# this doesn't work and that's ok for now
+#LINE_IN_FILE alias\ pkg=\'echo\ disabled\' /etc/profile
+#LINE_IN_FILE alias\ pkg=\'echo\ disabled\' /root/.profile
