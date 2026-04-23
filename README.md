@@ -9,7 +9,6 @@ A collection of personal **FreeBSD [Bastille](https://bastillebsd.org/)** templa
 ## Current Templates
 
 - `init-base/`: A base template that installs common GNU utilities, configures Bash, and sets up sensible defaults.
-- `skeljail/`: A "skeleton of a skeleton" template (currently) used for creating ultra-thin jails. Includes `launch.sh` to help with rapid deployment.
 
 ## this-is-cool
 
