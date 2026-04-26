@@ -1,9 +1,7 @@
 # ==============================================================================
 # BASTILLEFILE: init-base
-# PURPOSE: my main jail with some stuff (and GNU and notes)
+# PURPOSE: a basic jail with common apps for testing
 # ==============================================================================
-
-# mkdir -p /mnt/zfs0/bastille/templates/shmoinkle/base/root
 
 ARG TEMPLATE_AUTHOR="shmoinkle"
 
@@ -18,25 +16,23 @@ CMD echo "export LANG=en_US.UTF-8" >> /etc/profile
 CMD sed -i '' 's/quarterly/latest/g' /etc/pkg/FreeBSD.conf
 CMD pkg update
 CMD pkg upgrade
-# I did have gwhich here, but decided we use 'type -P' in bash instead
-PKG bash bash-completion htop ncdu vim coreutils gnugrep gsed gawk findutils curl wget jq screen python313 git-tiny rsync tree fastfetch chafa
-# fastfetch and chafa are def not really important but I think they're neat :)
+PKG bash bash-completion htop ncdu vim curl wget jq screen python313 git-tiny rsync tree fastfetch chafa
 
-# explicitly disabled
 SYSRC sshd_enable="NO"
 SYSRC sendmail_enable="NONE"
 SYSRC clear_tmp_enable="YES"
 SYSRC syslogd_flags="-ss" # Prevents syslog from listening on network sockets
+update_motd=NO
+background_fsck=NO
 
-# dotfiles with preferred settings (mostly coreutil aliases lol)
 CP root/.bashrc /root/.bashrc
 CP root/.vimrc /root/.vimrc
 
 CMD pw usermod root -s /usr/local/bin/bash
 
-# a persistent root dir
 MOUNT tmpfs tmp tmpfs rw,nosuid,mode=01777 0 0
-MOUNT /mnt/zfs0/configs/root /root nullfs rw 0 0
+# Uncomment for a different root homedir
+#MOUNT /mnt/zfs0/configs/root /root nullfs rw 0 0
 
 # Additional notes and stuff
 # https://bastille.readthedocs.io/en/latest/chapters/template.html

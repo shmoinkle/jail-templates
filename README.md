@@ -15,12 +15,11 @@ bastille template JAILNAME shmoinkle/init-base
 
 ## Current Templates
 
-- `init-base/`: A base template that installs common GNU utilities, configures Bash, and sets up sensible defaults.
+- `init-base/`: A base template that installs common utilities, configures Bash, and sets up some defaults.
 
 ## Notes
 
-- For extra automation when deployment of these templates, check out my **[bastille-wrapper](https://github.com/shmoinkle/bastille-wrapper)** script.
-- Note: Many paths are currently hardcoded; moving these to `ARG` and `RENDER` is on the TODO list.
+- For extra automation when deployment of templates, check out my **[bastille-wrapper](https://github.com/shmoinkle/bastille-wrapper)** script.
 
 ## this-is-cool
 
