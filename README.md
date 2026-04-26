@@ -6,14 +6,26 @@
 
 A collection of personal **FreeBSD [Bastille](https://bastillebsd.org/)** templates designed to streamline jail management.
 
+## Usage
+
+```bash
+git clone https://github.com/shmoinkle/jail-templates "/usr/local/bastille/templates/shmoinkle"
+bastille template JAILNAME shmoinkle/init-base
+```
+
 ## Current Templates
 
 - `init-base/`: A base template that installs common GNU utilities, configures Bash, and sets up sensible defaults.
 
+## Notes
+
+- For extra automation when deployment of these templates, check out my **[bastille-wrapper](https://github.com/shmoinkle/bastille-wrapper)** script.
+- Note: Many paths are currently hardcoded; moving these to `ARG` and `RENDER` is on the TODO list.
+
 ## this-is-cool
 
 - **[FreeBSD](https://www.freebsd.org/)**: it's great™!
-- **[BastilleBSD](https://bastillebsd.org/)**: way better than iocage.
+- **[BastilleBSD](https://github.com/bastillebsd)**: way better than iocage.
 - **[XigmaNAS](https://www.xigmanas.com/)**: bye, TrueNAS CORE👋
 
 ---

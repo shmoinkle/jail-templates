@@ -3,16 +3,12 @@
 # PURPOSE: my main jail with some stuff (and GNU and notes)
 # ==============================================================================
 
-# Making a new template from scratch:
 # mkdir -p /mnt/zfs0/bastille/templates/shmoinkle/base/root
-# copy files to that root dir, and Bastillefile goes into base dir
 
 ARG TEMPLATE_AUTHOR="shmoinkle"
 
-# I don't think I need this, but it doesn't hurt.
 CMD export ASSUME_ALWAYS_YES=yes
 
-# It's all I know :(
 CMD echo "export LC_ALL=en_US.UTF-8" >> /root/.profile
 CMD echo "export LANG=en_US.UTF-8" >> /root/.profile
 CMD echo "export LC_ALL=en_US.UTF-8" >> /etc/profile
@@ -24,29 +20,25 @@ CMD pkg update
 CMD pkg upgrade
 # I did have gwhich here, but decided we use 'type -P' in bash instead
 PKG bash bash-completion htop ncdu vim coreutils gnugrep gsed gawk findutils curl wget jq screen python313 git-tiny rsync tree fastfetch chafa
-# Also fastfetch and chafa are def not really important, but again, I like them :)
+# fastfetch and chafa are def not really important but I think they're neat :)
 
-# explicitly disable some stuff in this base
+# explicitly disabled
 SYSRC sshd_enable="NO"
 SYSRC sendmail_enable="NONE"
 SYSRC clear_tmp_enable="YES"
 SYSRC syslogd_flags="-ss" # Prevents syslog from listening on network sockets
 
-# drop in some dotfiles the way i (currently) like them.
+# dotfiles with preferred settings (mostly coreutil aliases lol)
 CP root/.bashrc /root/.bashrc
 CP root/.vimrc /root/.vimrc
 
-# bASH
 CMD pw usermod root -s /usr/local/bin/bash
 
-# I had this rm, but i think we can just do the mount.
-#RUN rm -rf /root/* /root/.* 2>/dev/null || true
-
-# a persistent root dir that can later be mounted to a new jail if ya needed to recreate it or whatever
-MOUNT /mnt/zfs0/configs/base /root nullfs rw 0 0
+# a persistent root dir
 MOUNT tmpfs tmp tmpfs rw,nosuid,mode=01777 0 0
+MOUNT /mnt/zfs0/configs/root /root nullfs rw 0 0
 
-# Additional features and notes and stuff
+# Additional notes and stuff
 # https://bastille.readthedocs.io/en/latest/chapters/template.html
 # RENDER etc/custom.conf /usr/local/etc/custom.conf
 # RENDER: Operates exactly like CP, but it parses the file and replaces any 
