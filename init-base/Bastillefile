@@ -22,8 +22,8 @@ SYSRC sshd_enable="NO"
 SYSRC sendmail_enable="NONE"
 SYSRC clear_tmp_enable="YES"
 SYSRC syslogd_flags="-ss" # Prevents syslog from listening on network sockets
-update_motd=NO
-background_fsck=NO
+SYSRC update_motd=NO
+SYSRC background_fsck=NO
 
 CP root/.bashrc /root/.bashrc
 CP root/.vimrc /root/.vimrc
